@@ -1,0 +1,214 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "nodes": [
+    {
+      "type": "inputNode",
+      "content": {
+        "schema": ""
+      },
+      "id": "64b76904-8e26-47a3-a2fb-6dae5b28c5d5",
+      "name": "request",
+      "position": {
+        "x": -30,
+        "y": 195
+      }
+    },
+    {
+      "type": "outputNode",
+      "content": {
+        "schema": ""
+      },
+      "id": "c5fe2825-0fff-4fa5-88a9-2f67cff90875",
+      "name": "response",
+      "position": {
+        "x": 920,
+        "y": 340
+      }
+    },
+    {
+      "type": "expressionNode",
+      "content": {
+        "expressions": [
+          {
+            "id": "0bc18a53-1090-483d-9292-ff8ae184416e",
+            "key": "percentualExcesso",
+            "value": "((infracao.velocidadeRegistrada - infracao.velocidadePermitida) / infracao.velocidadePermitida) * 100"
+          }
+        ],
+        "passThrough": true,
+        "inputField": null,
+        "outputPath": null,
+        "executionMode": "single"
+      },
+      "id": "fccd37c7-4db2-4d0a-bca0-ac88e5a46c9a",
+      "name": "Calcular % Excesso",
+      "position": {
+        "x": 280,
+        "y": 195
+      }
+    },
+    {
+      "type": "decisionTableNode",
+      "content": {
+        "hitPolicy": "first",
+        "rules": [
+          {
+            "_id": "cc27fda7-9094-42d5-a06b-e927ce31c438",
+            "5a99b934-2053-4a35-bff7-1e5e4bb9cb13": "<=0",
+            "187c2a39-c72b-4706-abb8-7c1b38d6d962": "\"SEM INFRACAO\"",
+            "b909f12d-e862-48b4-a165-7afebaae0442": "0",
+            "21042187-3753-4906-bfeb-8d6dda54dae6": "0",
+            "5e60416d-8b0f-45af-8d10-ccbe99b2e647": "false",
+            "8c92d727-b53a-4ca9-9c98-8c559e155d6f": "\"não houve excesso de velocodade.\""
+          },
+          {
+            "_id": "59d5f868-1a59-458e-8c1f-20fb1716f863",
+            "5a99b934-2053-4a35-bff7-1e5e4bb9cb13": "> 0 and <=20",
+            "187c2a39-c72b-4706-abb8-7c1b38d6d962": "\"MEDIA\"",
+            "b909f12d-e862-48b4-a165-7afebaae0442": "4",
+            "21042187-3753-4906-bfeb-8d6dda54dae6": "130.16",
+            "5e60416d-8b0f-45af-8d10-ccbe99b2e647": "false",
+            "8c92d727-b53a-4ca9-9c98-8c559e155d6f": "\"velocidade até 20% acima do limite.\""
+          },
+          {
+            "_id": "49684ad6-d595-4f94-aa4d-6c4324c52e3c",
+            "5a99b934-2053-4a35-bff7-1e5e4bb9cb13": ">20 and <=50",
+            "187c2a39-c72b-4706-abb8-7c1b38d6d962": "\"GRAVE\"",
+            "b909f12d-e862-48b4-a165-7afebaae0442": "5",
+            "21042187-3753-4906-bfeb-8d6dda54dae6": "195.23",
+            "5e60416d-8b0f-45af-8d10-ccbe99b2e647": "false",
+            "8c92d727-b53a-4ca9-9c98-8c559e155d6f": "\"velocidade entre 20 e 50% acima do limite\""
+          },
+          {
+            "_id": "664bbbe3-5c59-420d-be65-70d5ff360b77",
+            "5a99b934-2053-4a35-bff7-1e5e4bb9cb13": ">50",
+            "187c2a39-c72b-4706-abb8-7c1b38d6d962": "\"GRAVISSIMA\"",
+            "b909f12d-e862-48b4-a165-7afebaae0442": "7",
+            "21042187-3753-4906-bfeb-8d6dda54dae6": "880.41",
+            "5e60416d-8b0f-45af-8d10-ccbe99b2e647": "true",
+            "8c92d727-b53a-4ca9-9c98-8c559e155d6f": "\"velocidade superior a 50% do limite permitido\n\""
+          }
+        ],
+        "inputs": [
+          {
+            "id": "5a99b934-2053-4a35-bff7-1e5e4bb9cb13",
+            "name": "Input",
+            "field": "percentualExcesso"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "187c2a39-c72b-4706-abb8-7c1b38d6d962",
+            "name": "Output",
+            "field": "gravidade"
+          },
+          {
+            "id": "b909f12d-e862-48b4-a165-7afebaae0442",
+            "name": "Output",
+            "field": "pontos"
+          },
+          {
+            "id": "21042187-3753-4906-bfeb-8d6dda54dae6",
+            "name": "Output",
+            "field": "valorMulta"
+          },
+          {
+            "id": "5e60416d-8b0f-45af-8d10-ccbe99b2e647",
+            "name": "Output",
+            "field": "suspenderCondutor"
+          },
+          {
+            "id": "8c92d727-b53a-4ca9-9c98-8c559e155d6f",
+            "name": "Output",
+            "field": "mesagem"
+          }
+        ],
+        "passThrough": true,
+        "inputField": null,
+        "outputPath": null,
+        "executionMode": "single"
+      },
+      "id": "19563760-8b0d-4c28-8ec1-1bb850d362df",
+      "name": "Classificar Infracao ",
+      "position": {
+        "x": 595,
+        "y": 195
+      }
+    },
+    {
+      "type": "decisionTableNode",
+      "content": {
+        "hitPolicy": "first",
+        "rules": [
+          {
+            "_id": "eb9fb8a9-44d1-43ab-8aed-35e691dd36f7",
+            "d268bf6d-adc8-4e85-bd7a-c4e65b7717c7": "\"GRAVISSIMA\"",
+            "c3d9dda6-ff5f-46e9-95fe-aff800c9ac08": "true",
+            "e32a826e-4733-47de-9446-7548bea3e864": "true"
+          },
+          {
+            "_id": "1f6a7be0-6a14-41b7-b7cf-9ccfa130383a",
+            "d268bf6d-adc8-4e85-bd7a-c4e65b7717c7": "",
+            "c3d9dda6-ff5f-46e9-95fe-aff800c9ac08": "",
+            "e32a826e-4733-47de-9446-7548bea3e864": "false"
+          }
+        ],
+        "inputs": [
+          {
+            "id": "d268bf6d-adc8-4e85-bd7a-c4e65b7717c7",
+            "name": "Input",
+            "field": "gravidade"
+          },
+          {
+            "id": "c3d9dda6-ff5f-46e9-95fe-aff800c9ac08",
+            "name": "New field",
+            "field": "condutor.possuiReincidencia"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e32a826e-4733-47de-9446-7548bea3e864",
+            "name": "Output",
+            "field": "apreenderVeiculo"
+          }
+        ],
+        "passThrough": true,
+        "inputField": null,
+        "outputPath": null,
+        "executionMode": "single"
+      },
+      "id": "54b9edc4-c3f4-4c27-803d-ac21c950092b",
+      "name": "Decidir apreensao",
+      "position": {
+        "x": 930,
+        "y": 195
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "61869a3f-63a8-442d-a17f-e68a2c583ebd",
+      "sourceId": "64b76904-8e26-47a3-a2fb-6dae5b28c5d5",
+      "type": "edge",
+      "targetId": "fccd37c7-4db2-4d0a-bca0-ac88e5a46c9a"
+    },
+    {
+      "id": "a13de8f7-5551-4c15-8062-828e6d99f138",
+      "sourceId": "fccd37c7-4db2-4d0a-bca0-ac88e5a46c9a",
+      "type": "edge",
+      "targetId": "19563760-8b0d-4c28-8ec1-1bb850d362df"
+    },
+    {
+      "id": "a3fc8847-8b84-46b0-8b5a-869a4c39b512",
+      "sourceId": "19563760-8b0d-4c28-8ec1-1bb850d362df",
+      "type": "edge",
+      "targetId": "54b9edc4-c3f4-4c27-803d-ac21c950092b"
+    },
+    {
+      "id": "7705bedf-e0a6-4c59-b4a2-a8b032bf22b9",
+      "sourceId": "54b9edc4-c3f4-4c27-803d-ac21c950092b",
+      "type": "edge",
+      "targetId": "c5fe2825-0fff-4fa5-88a9-2f67cff90875"
+    }
+  ]
+}
