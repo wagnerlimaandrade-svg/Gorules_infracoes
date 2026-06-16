@@ -1,0 +1,59 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "nodes": [
+    {
+      "type": "inputNode",
+      "content": {
+        "schema": ""
+      },
+      "id": "64b76904-8e26-47a3-a2fb-6dae5b28c5d5",
+      "name": "request",
+      "position": {
+        "x": -30,
+        "y": 195
+      }
+    },
+    {
+      "type": "outputNode",
+      "content": {
+        "schema": ""
+      },
+      "id": "c5fe2825-0fff-4fa5-88a9-2f67cff90875",
+      "name": "response",
+      "position": {
+        "x": 565,
+        "y": 195
+      }
+    },
+    {
+      "type": "expressionNode",
+      "content": {
+        "expressions": [
+          {
+            "id": "0bc18a53-1090-483d-9292-ff8ae184416e",
+            "key": "percentualExcesso",
+            "value": "((infracao.velocidadeRegistrada - infracao.velocidadePermitida) / infracao.velocidadePermitida) * 100"
+          }
+        ],
+        "passThrough": true,
+        "inputField": null,
+        "outputPath": null,
+        "executionMode": "single"
+      },
+      "id": "fccd37c7-4db2-4d0a-bca0-ac88e5a46c9a",
+      "name": "Calcular % Excesso",
+      "position": {
+        "x": 280,
+        "y": 195
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "61869a3f-63a8-442d-a17f-e68a2c583ebd",
+      "sourceId": "64b76904-8e26-47a3-a2fb-6dae5b28c5d5",
+      "type": "edge",
+      "targetId": "fccd37c7-4db2-4d0a-bca0-ac88e5a46c9a"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "infracao": {
+    "codigo": "VELOCIDADE",
+    "velocidadeRegistrada": 92,
+    "velocidadePermitida": 60,
+    "cidade": "Campinas",
+    "tipoVeiculo": "CARRO"
+  },
+  "condutor": {
+    "possuiReincidencia": false,
+    "quantidadePontos": 12
+  }
+}

@@ -1,0 +1,4 @@
+node_modules/
+decision-service/node_modules/
+.env
+*.log
